@@ -374,7 +374,8 @@ export class BookService {
   }
 
   async bulkImportBooks(books: CreateBookData[]): Promise<{ successful: number; failed: number; errors: string[] }> {
-    const client = await query('SELECT 1'); // Get a client for transaction
+    const { getClient } = await import('../config/database');
+    const client = await getClient();
     let successful = 0;
     let failed = 0;
     const errors: string[] = [];
@@ -385,6 +386,8 @@ export class BookService {
       for (let i = 0; i < books.length; i++) {
         try {
           const bookData = books[i];
+          if (!bookData) continue;
+
           await client.query(
             `INSERT INTO books (
               isbn, title, author, genre, publisher, edition, publication_year,
@@ -420,6 +423,8 @@ export class BookService {
     } catch (error) {
       await client.query('ROLLBACK');
       throw new Error('Bulk import transaction failed');
+    } finally {
+      client.release();
     }
 
     return { successful, failed, errors };
