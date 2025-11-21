@@ -58,7 +58,7 @@ let users: User[] = [
   {
     id: '2',
     email: 'user@library.com',
-    password_hash: 'user123_hash', // Simplified for demo
+    password_hash: 'User123_hash', // Simplified for demo
     first_name: 'Demo',
     last_name: 'User',
     role: 'user',
