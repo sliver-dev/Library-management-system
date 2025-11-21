@@ -70,7 +70,7 @@ export const verifyAccessToken = (token: string): JWTPayload => {
 
 export const verifyRefreshToken = (token: string): JWTPayload => {
   try {
-    return jwt.verify(token, JWT_REFRESH_SECRET, {
+    return jwt.verify(token, JWT_REFRESH_SECRET as string, {
       issuer: 'library-management-system',
       audience: 'library-management-users',
     }) as JWTPayload;
