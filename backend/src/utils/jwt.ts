@@ -28,6 +28,7 @@ export const generateAccessToken = (user: UserWithoutPassword): string => {
     expiresIn: JWT_EXPIRES_IN,
     issuer: 'library-management-system',
     audience: 'library-management-users',
+    algorithm: 'HS256',
   };
 
   return jwt.sign(payload, JWT_SECRET, options);
