@@ -15,13 +15,12 @@ const generateAccessToken = (user) => {
         email: user.email,
         role: user.role,
     };
-    const options = {
+    return jsonwebtoken_1.default.sign(payload, JWT_SECRET, {
         expiresIn: JWT_EXPIRES_IN,
         issuer: 'library-management-system',
         audience: 'library-management-users',
         algorithm: 'HS256',
-    };
-    return jsonwebtoken_1.default.sign(payload, JWT_SECRET, options);
+    });
 };
 exports.generateAccessToken = generateAccessToken;
 const generateRefreshToken = (user) => {
@@ -30,13 +29,12 @@ const generateRefreshToken = (user) => {
         email: user.email,
         role: user.role,
     };
-    const refreshOptions = {
+    return jsonwebtoken_1.default.sign(payload, JWT_REFRESH_SECRET, {
         expiresIn: JWT_REFRESH_EXPIRES_IN,
         issuer: 'library-management-system',
         audience: 'library-management-users',
         algorithm: 'HS256',
-    };
-    return jsonwebtoken_1.default.sign(payload, JWT_REFRESH_SECRET, refreshOptions);
+    });
 };
 exports.generateRefreshToken = generateRefreshToken;
 const generateTokenPair = (user) => {
