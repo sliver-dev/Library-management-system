@@ -44,7 +44,7 @@ let users: User[] = [
   {
     id: '1',
     email: 'admin@library.com',
-    password_hash: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewNUDyCXfsYGGVVy', // Admin123!
+    password_hash: '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewNUDyCXfsYGGVVy', // Admin123!
     first_name: 'System',
     last_name: 'Administrator',
     role: 'admin',
@@ -58,7 +58,7 @@ let users: User[] = [
   {
     id: '2',
     email: 'user@library.com',
-    password_hash: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewNUDyCXfsYGGVVy', // User123!
+    password_hash: '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewNUDyCXfsYGGVVy', // User123!
     first_name: 'Demo',
     last_name: 'User',
     role: 'user',
