@@ -1,4 +1,4 @@
-import jwt, { SignOptions } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { UserWithoutPassword, UserRole } from '../models/User';
 
 interface JWTPayload {
