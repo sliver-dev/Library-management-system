@@ -8,6 +8,7 @@ import { Server } from 'socket.io';
 
 // Import routes
 import authRoutes from './routes/auth';
+import bookRoutes from './routes/books';
 
 // Load environment variables
 dotenv.config();
