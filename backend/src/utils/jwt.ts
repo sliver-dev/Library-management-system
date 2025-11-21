@@ -39,14 +39,12 @@ export const generateRefreshToken = (user: UserWithoutPassword): string => {
     role: user.role,
   };
 
-  const refreshOptions: SignOptions = {
+  return jwt.sign(payload, JWT_REFRESH_SECRET, {
     expiresIn: JWT_REFRESH_EXPIRES_IN,
     issuer: 'library-management-system',
     audience: 'library-management-users',
     algorithm: 'HS256',
-  };
-
-  return jwt.sign(payload, JWT_REFRESH_SECRET, refreshOptions);
+  });
 };
 
 export const generateTokenPair = (user: UserWithoutPassword): TokenPair => {
