@@ -24,14 +24,12 @@ export const generateAccessToken = (user: UserWithoutPassword): string => {
     role: user.role,
   };
 
-  const options: SignOptions = {
+  return jwt.sign(payload, JWT_SECRET, {
     expiresIn: JWT_EXPIRES_IN,
     issuer: 'library-management-system',
     audience: 'library-management-users',
     algorithm: 'HS256',
-  };
-
-  return jwt.sign(payload, JWT_SECRET, options);
+  });
 };
 
 export const generateRefreshToken = (user: UserWithoutPassword): string => {
