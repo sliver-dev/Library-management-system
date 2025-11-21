@@ -2,20 +2,27 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Use memory database for demonstration
-const useMemoryDB = process.env.USE_MEMORY_DB === 'true' || !process.env.DB_HOST;
+// Check if we should use memory database
+const useMemoryDB = process.env.USE_MEMORY_DB === 'true';
 
 if (useMemoryDB) {
   console.log('🗄️  Using in-memory database for demonstration');
-  const memoryDB = await import('./memory-db');
-  module.exports = {
-    query: memoryDB.query,
-    getClient: memoryDB.getClient,
-  };
+  // Dynamic import for memory database
+  const { query, getClient } = require('./memory-db');
+  module.exports = { query, getClient };
 } else {
-  console.log('🗄️  Using PostgreSQL database');
-  // PostgreSQL implementation would go here
+  console.log('🗄️  PostgreSQL database not configured, falling back to memory database');
+  const { query, getClient } = require('./memory-db');
+  module.exports = { query, getClient };
 }
 
-// Re-export for compatibility
-export { query, getClient } from (useMemoryDB ? './memory-db' : './postgres-db');
+// For compatibility with existing imports
+export const query = async (text: string, params?: any[]) => {
+  const db = require('./database');
+  return await db.query(text, params);
+};
+
+export const getClient = () => {
+  const db = require('./database');
+  return db.getClient();
+};
