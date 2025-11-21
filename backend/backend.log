@@ -9,3 +9,4 @@ Mock query: SELECT id, email, password_hash, first_name, last_name, role, phone,
        FROM users
        WHERE email = $1 [ 'admin@library.com' ]
 Mock query: UPDATE users SET last_login = NOW() WHERE id = $1 [ '1' ]
+2025-11-21T16:22:38.486Z - GET /api/books
