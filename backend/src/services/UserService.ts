@@ -279,9 +279,9 @@ export class UserService {
     }
   }
 
-  async searchUsers(query: string, page: number = 1, limit: number = 10): Promise<{ users: UserWithoutPassword[]; total: number }> {
+  async searchUsers(searchTerm: string, page: number = 1, limit: number = 10): Promise<{ users: UserWithoutPassword[]; total: number }> {
     const offset = (page - 1) * limit;
-    const searchPattern = `%${query}%`;
+    const searchPattern = `%${searchTerm}%`;
 
     try {
       // Get total count
