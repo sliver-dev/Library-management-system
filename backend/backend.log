@@ -1,0 +1,12 @@
+🗄️  Using in-memory database for demonstration
+🚀 Library Management System API running on port 5000
+📚 Health check available at http://localhost:5000/health
+🔌 WebSocket server running
+2025-11-21T16:22:31.508Z - POST /api/auth/login
+Mock query: SELECT id, email, password_hash, first_name, last_name, role, phone, address,
+              is_banned, registration_date, last_login, profile_image_url,
+              created_at, updated_at
+       FROM users
+       WHERE email = $1 [ 'admin@library.com' ]
+Mock query: UPDATE users SET last_login = NOW() WHERE id = $1 [ '1' ]
+2025-11-21T16:22:38.486Z - GET /api/books
