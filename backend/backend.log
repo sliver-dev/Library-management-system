@@ -2,3 +2,4 @@
 🚀 Library Management System API running on port 5000
 📚 Health check available at http://localhost:5000/health
 🔌 WebSocket server running
+2025-11-21T16:18:04.810Z - GET /health
