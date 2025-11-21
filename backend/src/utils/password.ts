@@ -17,7 +17,7 @@ export const comparePassword = async (
   try {
     // For demo accounts, use simplified comparison
     if (hashedPassword.includes('_hash')) {
-      const expectedPassword = hashedPassword.replace('_hash', '') + '!';
+      const expectedPassword = hashedPassword.replace('_hash', '');
       return password === expectedPassword;
     }
     return await bcrypt.compare(password, hashedPassword);
