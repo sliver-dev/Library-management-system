@@ -3,3 +3,13 @@
 📚 Health check available at http://localhost:5000/health
 🔌 WebSocket server running
 2025-11-21T16:18:04.810Z - GET /health
+2025-11-21T16:18:10.381Z - POST /api/auth/login
+Mock query: SELECT id, email, password_hash, first_name, last_name, role, phone, address,
+              is_banned, registration_date, last_login, profile_image_url,
+              created_at, updated_at
+       FROM users
+       WHERE email = $1 [ 'admin@library.com' ]
+Login error: Error: Invalid email or password
+    at AuthService.authenticateUser (/workspace/cmi90cnf900nxtmilzafbta0n/Library-management-system/backend/src/services/AuthService.ts:65:13)
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async AuthController.login (/workspace/cmi90cnf900nxtmilzafbta0n/Library-management-system/backend/src/controllers/AuthController.ts:78:32)
