@@ -175,7 +175,8 @@ export class UserService {
   }
 
   async deleteUser(userId: string): Promise<boolean> {
-    const client = await query('SELECT 1'); // Get client for transaction
+    const { getClient } = await import('../config/database');
+    const client = await getClient();
 
     try {
       await client.query('BEGIN');
@@ -203,6 +204,8 @@ export class UserService {
       await client.query('ROLLBACK');
       console.error('Error deleting user:', error);
       throw new Error('Failed to delete user');
+    } finally {
+      client.release();
     }
   }
 
