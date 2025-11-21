@@ -10,8 +10,7 @@ import LoginPage from './pages/auth/LoginPage';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import UserDashboard from './pages/user/UserDashboard';
 
-// Layout components
-import Header from './components/common/Header';
+// Layout components (Header will be added later)
 
 // Protected route component
 import ProtectedRoute from './components/common/ProtectedRoute';
