@@ -19,6 +19,7 @@ const generateAccessToken = (user) => {
         expiresIn: JWT_EXPIRES_IN,
         issuer: 'library-management-system',
         audience: 'library-management-users',
+        algorithm: 'HS256',
     };
     return jsonwebtoken_1.default.sign(payload, JWT_SECRET, options);
 };
@@ -33,6 +34,7 @@ const generateRefreshToken = (user) => {
         expiresIn: JWT_REFRESH_EXPIRES_IN,
         issuer: 'library-management-system',
         audience: 'library-management-users',
+        algorithm: 'HS256',
     };
     return jsonwebtoken_1.default.sign(payload, JWT_REFRESH_SECRET, refreshOptions);
 };
