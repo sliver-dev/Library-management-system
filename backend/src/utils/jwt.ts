@@ -38,7 +38,7 @@ export const generateRefreshToken = (user: UserWithoutPassword): string => {
     role: user.role,
   };
 
-  return jwt.sign(payload, JWT_REFRESH_SECRET, {
+  return jwt.sign(payload, JWT_REFRESH_SECRET as string, {
     expiresIn: JWT_REFRESH_EXPIRES_IN,
     issuer: 'library-management-system',
     audience: 'library-management-users',
