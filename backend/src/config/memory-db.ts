@@ -39,12 +39,12 @@ export interface Book {
   updated_at: Date;
 }
 
-// In-memory storage
+// In-memory storage with demo accounts
 let users: User[] = [
   {
     id: '1',
     email: 'admin@library.com',
-    password_hash: '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewNUDyCXfsYGGVVy', // Admin123!
+    password_hash: 'admin123_hash', // Simplified for demo
     first_name: 'System',
     last_name: 'Administrator',
     role: 'admin',
@@ -58,7 +58,7 @@ let users: User[] = [
   {
     id: '2',
     email: 'user@library.com',
-    password_hash: '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewNUDyCXfsYGGVVy', // User123!
+    password_hash: 'user123_hash', // Simplified for demo
     first_name: 'Demo',
     last_name: 'User',
     role: 'user',
