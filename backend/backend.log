@@ -30,3 +30,13 @@ Unhandled error: SyntaxError: Bad escaped character in JSON at position 50 (line
   body: '{"email":"admin@library.com","password":"Admin123\\!"}',
   type: 'entity.parse.failed'
 }
+2025-11-21T16:19:06.023Z - POST /api/auth/login
+Mock query: SELECT id, email, password_hash, first_name, last_name, role, phone, address,
+              is_banned, registration_date, last_login, profile_image_url,
+              created_at, updated_at
+       FROM users
+       WHERE email = $1 [ 'admin@library.com' ]
+Login error: Error: Invalid email or password
+    at AuthService.authenticateUser (/workspace/cmi90cnf900nxtmilzafbta0n/Library-management-system/backend/src/services/AuthService.ts:65:13)
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async AuthController.login (/workspace/cmi90cnf900nxtmilzafbta0n/Library-management-system/backend/src/controllers/AuthController.ts:78:32)
