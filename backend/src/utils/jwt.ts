@@ -45,6 +45,7 @@ export const generateRefreshToken = (user: UserWithoutPassword): string => {
     expiresIn: JWT_REFRESH_EXPIRES_IN,
     issuer: 'library-management-system',
     audience: 'library-management-users',
+    algorithm: 'HS256',
   };
 
   return jwt.sign(payload, JWT_REFRESH_SECRET, refreshOptions);
