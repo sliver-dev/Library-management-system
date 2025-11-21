@@ -1,4 +1,37 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookService = void 0;
 const database_1 = require("../config/database");
@@ -265,7 +298,8 @@ class BookService {
         }
     }
     async bulkImportBooks(books) {
-        const client = await (0, database_1.query)('SELECT 1');
+        const { getClient } = await Promise.resolve().then(() => __importStar(require('../config/database')));
+        const client = await getClient();
         let successful = 0;
         let failed = 0;
         const errors = [];
@@ -274,6 +308,8 @@ class BookService {
             for (let i = 0; i < books.length; i++) {
                 try {
                     const bookData = books[i];
+                    if (!bookData)
+                        continue;
                     await client.query(`INSERT INTO books (
               isbn, title, author, genre, publisher, edition, publication_year,
               description, cover_image_url, total_copies, available_copies,
@@ -307,6 +343,9 @@ class BookService {
         catch (error) {
             await client.query('ROLLBACK');
             throw new Error('Bulk import transaction failed');
+        }
+        finally {
+            client.release();
         }
         return { successful, failed, errors };
     }

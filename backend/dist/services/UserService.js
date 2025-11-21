@@ -159,7 +159,8 @@ class UserService {
         }
     }
     async deleteUser(userId) {
-        const client = await (0, database_1.query)('SELECT 1');
+        const { getClient } = await Promise.resolve().then(() => __importStar(require('../config/database')));
+        const client = await getClient();
         try {
             await client.query('BEGIN');
             await client.query('DELETE FROM user_reading_history WHERE user_id = $1', [userId]);
@@ -176,6 +177,9 @@ class UserService {
             await client.query('ROLLBACK');
             console.error('Error deleting user:', error);
             throw new Error('Failed to delete user');
+        }
+        finally {
+            client.release();
         }
     }
     async banUser(userId) {
@@ -233,16 +237,16 @@ class UserService {
             throw new Error('Failed to retrieve user statistics');
         }
     }
-    async searchUsers(query, page = 1, limit = 10) {
+    async searchUsers(searchTerm, page = 1, limit = 10) {
         const offset = (page - 1) * limit;
-        const searchPattern = `%${query}%`;
+        const searchPattern = `%${searchTerm}%`;
         try {
-            const countResult = await query(`SELECT COUNT(*) FROM users
+            const countResult = await (0, database_1.query)(`SELECT COUNT(*) FROM users
          WHERE LOWER(email) LIKE LOWER($1)
             OR LOWER(first_name) LIKE LOWER($1)
             OR LOWER(last_name) LIKE LOWER($1)`, [searchPattern]);
             const total = parseInt(countResult.rows[0].count);
-            const usersResult = await query(`SELECT id, email, first_name, last_name, role, phone, address,
+            const usersResult = await (0, database_1.query)(`SELECT id, email, first_name, last_name, role, phone, address,
                 is_banned, registration_date, last_login, profile_image_url,
                 created_at, updated_at
          FROM users

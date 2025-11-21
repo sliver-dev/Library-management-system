@@ -30,6 +30,8 @@ export interface UpdateUserData {
     phone?: string;
     address?: string;
     profile_image_url?: string;
+    role?: UserRole;
+    is_banned?: boolean;
 }
 export interface UserLoginData {
     email: string;

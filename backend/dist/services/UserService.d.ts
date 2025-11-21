@@ -17,7 +17,7 @@ export declare class UserService {
         adminUsers: number;
         regularUsers: number;
     }>;
-    searchUsers(query: string, page?: number, limit?: number): Promise<{
+    searchUsers(searchTerm: string, page?: number, limit?: number): Promise<{
         users: UserWithoutPassword[];
         total: number;
     }>;
