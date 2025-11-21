@@ -73,7 +73,8 @@ export const verifyAccessToken = (token: string): JWTPayload => {
 
 export const verifyRefreshToken = (token: string): JWTPayload => {
   try {
-    return jwt.verify(token, JWT_REFRESH_SECRET as string, {
+    // @ts-ignore
+    return jwt.verify(token, JWT_REFRESH_SECRET, {
       issuer: 'library-management-system',
       audience: 'library-management-users',
     }) as JWTPayload;
