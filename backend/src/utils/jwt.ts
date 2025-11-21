@@ -54,7 +54,7 @@ export const generateTokenPair = (user: UserWithoutPassword): TokenPair => {
 
 export const verifyAccessToken = (token: string): JWTPayload => {
   try {
-    return jwt.verify(token, JWT_SECRET, {
+    return jwt.verify(token, JWT_SECRET as string, {
       issuer: 'library-management-system',
       audience: 'library-management-users',
     }) as JWTPayload;
