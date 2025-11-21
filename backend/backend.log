@@ -1,0 +1,4 @@
+🗄️  Using in-memory database for demonstration
+🚀 Library Management System API running on port 5000
+📚 Health check available at http://localhost:5000/health
+🔌 WebSocket server running
